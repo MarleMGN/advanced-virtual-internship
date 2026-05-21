@@ -1,0 +1,73 @@
+.numbers__section--title {
+    font-size: 32px;
+    color: #032b41;
+    text-align: center;
+    margin-bottom: 32px;
+    font-weight: 700;
+}
+
+.numbers__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    gap: 40px;
+}
+
+.numbers {
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 24px 40px;
+    background-color: #d7e9ff;
+}
+
+.numbers__title {
+    font-size: 40px;
+    color: #032b41;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.numbers__sub--title {
+    font-weight: 300;
+    color: #394547;
+}
+
+.numbers__icon {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    gap: 4px;
+}
+
+.numbers__icon svg {
+    height: 48px;
+    width: 48px;
+    color: #0365f2;
+}
+
+.numbers__star--icon svg {
+    height: 20px;
+    width: 20px;
+}
+
+@media (max-width: 768px) {
+    .numbers__section--title {
+        font-size: 24px;
+    }
+
+    .numbers__wrapper {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .numbers__title {
+        font-size: 32px;
+    }
+
+    .numbers__sub--title {
+        font-size: 14px;
+    }
+}
