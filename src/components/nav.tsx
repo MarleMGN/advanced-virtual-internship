@@ -1,8 +1,11 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import "./nav.css";
+import { useModal } from "@/context/ModalContext"
 
 const Nav = () => {
+  const { setModalOpen } = useModal()
   return (
     <>
       <nav className="nav">
@@ -18,7 +21,8 @@ const Nav = () => {
             />
           </figure>
           <ul className="nav__list--wrapper">
-            <li className="nav__list nav__list--login">Login</li>
+            <li className="nav__list nav__list--login" onClick={() => 
+              setModalOpen(true)} >Login</li>
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
