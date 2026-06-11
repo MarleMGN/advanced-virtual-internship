@@ -26,7 +26,6 @@ const Authentication = () => {
   async function handleGuestLogin() {
     setIsGuestLoading(true);
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         await signInAnonymously(auth);
         setModalOpen(false);
     } catch (err) {
@@ -41,7 +40,6 @@ const Authentication = () => {
   async function handleGoogleLogin() {
     setIsGoogleLoading(true);
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         await signInWithPopup(auth, googleProvider);
         setModalOpen(false);
     } catch (err) {
@@ -56,7 +54,6 @@ const Authentication = () => {
   async function handleSignUp() {
     setIsLoginLoading(true);
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         await createUserWithEmailAndPassword(auth, email, password);
         setModalOpen(false);
     } catch (err) {
@@ -71,7 +68,6 @@ const Authentication = () => {
   async function handlePasswordReset() {
     setIsResetLoading(true);
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         await sendPasswordResetEmail(auth, email);
         setIsSuccess(true);
     } catch (err) {
@@ -86,7 +82,6 @@ const Authentication = () => {
   async function handleLogin() {
     setIsLoginLoading(true);
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         await signInWithEmailAndPassword(auth, email, password);
         setModalOpen(false);
     } catch (err) {

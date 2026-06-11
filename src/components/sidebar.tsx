@@ -2,7 +2,7 @@ import React from "react";
 import "./sidebar.css";
 import Image from "next/image";
 
-const sidebar = () => {
+const Sidebar = () => {
   return (
     <>
       <div className="sidebar__overlay sidebar__overlay-hidden"></div>
@@ -24,7 +24,7 @@ const sidebar = () => {
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 1024 1024"
                   height="1em"
                   width="1em"
@@ -41,7 +41,7 @@ const sidebar = () => {
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 16 16"
                   height="1em"
                   width="1em"
@@ -53,7 +53,6 @@ const sidebar = () => {
               <div className="sidebar__link--text">Library</div>
             </a>
             <div
-              href="#"
               className="sidebar__link--wrapper sidebar__link--not-allowed"
             >
               <div className="sidebar__link--line"></div>
@@ -61,7 +60,7 @@ const sidebar = () => {
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 24 24"
                   height="1em"
                   width="1em"
@@ -76,7 +75,6 @@ const sidebar = () => {
               <div className="sidebar__link--text">Highlights</div>
             </div>
             <div
-              href="#"
               className="sidebar__link--wrapper sidebar__link--not-allowed"
             >
               <div className="sidebar__link--line"></div>
@@ -84,7 +82,7 @@ const sidebar = () => {
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 1024 1024"
                   height="1em"
                   width="1em"
@@ -111,7 +109,7 @@ const sidebar = () => {
               <div className="sidebar__link--line"></div>
               <div className="sidebar__icon--wrapper"></div>
               <div className="sidebar__link--text">
-                {isLogin ? "Login" : "Logout"}
+                {/* {isLogin ? "Login" : "Logout"} */}
               </div>
             </div>
           </div>
@@ -121,4 +119,4 @@ const sidebar = () => {
   );
 };
 
-export default sidebar;
+export default Sidebar;
