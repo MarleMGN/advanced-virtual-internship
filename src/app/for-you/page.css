@@ -140,8 +140,9 @@
 
 .recommended__book--sub-title {
     color: #032b41;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .recommended__book--details-wrapper {
