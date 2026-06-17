@@ -75,8 +75,50 @@
     cursor: not-allowed;
 }
 
+.sidebar__link--wrapper:not(.sidebar__link--not-allowed):hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar__overlay {
+    display: none;
+}
+
 @media (max-width: 768px) {
   .sidebar {
+    display: none;
+  }
+
+  .sidebar--closed {
+    display: none;
+  }
+
+  .sidebar--opened {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80%;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(0);
+  }
+
+  .sidebar__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #3a4649;
+    transition: opacity .4s ease 0s;
+    z-index: 10;
+    opacity: .65;
+    pointer-events: auto;
+  }
+
+  .sidebar__overlay-hidden {
     display: none;
   }
 }

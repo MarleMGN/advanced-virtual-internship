@@ -15,6 +15,15 @@ body {
   overflow-x: hidden;
 }
 
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    transition: all .3s;
+}
+
 .container {
   padding: 40px 0;
   width: 100%;
@@ -68,3 +77,10 @@ a {
     color-scheme: dark;
   }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        width: 100%;
+        margin-left: 0;
+    }
+  }
