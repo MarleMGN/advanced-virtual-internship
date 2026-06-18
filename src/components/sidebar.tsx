@@ -14,7 +14,7 @@ const { sidebarOpen } = useModal()
           <Image
             alt="logo"
             src="/logo.png"
-            width={495}
+            width={496}
             height={114}
             style={{ color: "transparent" }}
           />

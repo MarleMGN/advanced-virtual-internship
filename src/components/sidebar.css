@@ -18,11 +18,13 @@
     padding-top: 16px;
     max-width: 160px;
     margin: 0 auto;
+    width: 160px;
 }
 
 .sidebar__logo img {
-    width: 100%;
+    width: 100% !important;
     height: 40px;
+    aspect-ratio: unset;
 }
 
 .sidebar__wrapper {
@@ -95,6 +97,7 @@
   .sidebar--opened {
     display: flex;
     position: fixed;
+    flex-direction: column;
     top: 0;
     left: 0;
     height: 100%;
@@ -103,6 +106,12 @@
     background-color: #fff;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
     transform: translateX(0);
+  }
+
+  .sidebar__logo {
+    margin: 0;
+    padding-left: 24px;
+    width: 100%;
   }
 
   .sidebar__overlay {
