@@ -9,6 +9,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 const Authentication = () => {
   const { modalOpen, setModalOpen } = useModal();
@@ -92,6 +93,16 @@ const Authentication = () => {
         setIsLoginLoading(false);
     }
   }
+
+  async function handleLogout() {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    if (err instanceof Error) {
+      setError(err.message);
+    }
+  }
+}
 
   return (
     <>

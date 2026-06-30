@@ -1,5 +1,4 @@
 "use client"
-import Authentication from "@/components/authentication"
 import Landing from "@/components/landing"
 import Features from "@/components/features"
 import Reviews from "@/components/reviews"
@@ -12,7 +11,6 @@ export default function Home() {
   return (
     <div>
       <Nav />
-      <Authentication />
       <Landing />
       <Features />
       <Reviews />

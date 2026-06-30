@@ -2,13 +2,13 @@ import React from "react";
 import "./page.css";
 import Sidebar from "@/components/sidebar";
 import Searchbar from "@/components/searchbar";
+import SaveButton from "@/components/SaveButton";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   const book__url = `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`;
   const res = await fetch(book__url);
   const book = await res.json();
-  console.log(book);
   return (
     <>
       <div className="wrapper">
@@ -137,22 +137,14 @@ const page = async ({ params }: { params: { id: string } }) => {
                     <div className="inner-book__read--text">Listen</div>
                   </div>
                 </div>
-                <div className="inner-book__bookmark">
-                  <div className="inner-book__bookmark--icon">
-                    <svg
-                      stroke="currentColor"
-                      fill="currentColor"
-                      strokeWidth="0"
-                      viewBox="0 0 16 16"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
-                    </svg>
-                  </div>
-                  Add title to My Library
-                </div>
+                <SaveButton
+                  bookId={book.id}
+                  title={book.title}
+                  author={book.author}
+                  imageLink={book.imageLink}
+                  subTitle={book.subTitle}
+                  duration={book.duration}
+                />
                 <div className="inner-book__secondary--title">
                   What's it about?
                 </div>
@@ -170,22 +162,22 @@ const page = async ({ params }: { params: { id: string } }) => {
                   {book.authorDescription}
                 </div>
               </div>
-                <div className="inner-book--img-wrapper">
-                  <figure
-                    className="book__img--wrapper"
-                    style={{
-                      height: "300px",
-                      width: "300px",
-                      minWidth: "300px",
-                    }}
-                  >
-                    <img
-                      src={book.imageLink}
-                      alt={book.title}
-                      className="book__image"
-                    />
-                  </figure>
-                </div>
+              <div className="inner-book--img-wrapper">
+                <figure
+                  className="book__img--wrapper"
+                  style={{
+                    height: "300px",
+                    width: "300px",
+                    minWidth: "300px",
+                  }}
+                >
+                  <img
+                    src={book.imageLink}
+                    alt={book.title}
+                    className="book__image"
+                  />
+                </figure>
+              </div>
             </div>
           </div>
         </div>
