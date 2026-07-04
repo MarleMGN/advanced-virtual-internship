@@ -49,7 +49,7 @@
     cursor: pointer;
 }
 
-.active--tab {
+.sidebar__link--line.active--tab {
     background-color: #2bd97c;
 }
 

@@ -1,0 +1,37 @@
+.section__title.page__title {
+    text-align: left;
+    border-bottom: 1px solid #e1e7ea;
+    padding-bottom: 16px;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.settings__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #e1e7ea;
+}
+
+.settings__content:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.settings__sub-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.btn.settings__upgrade--btn {
+    width: fit-content;
+}
+
+@media (max-width: 768) {
+    .section__title.page__title {
+        font-size: 24px;
+    }
+}

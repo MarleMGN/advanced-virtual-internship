@@ -5,11 +5,16 @@ import Image from "next/image";
 import { useModal } from "@/context/ModalContext";
 import { auth } from "@/lib/firebase";
 import { signOut, User, onAuthStateChanged } from "firebase/auth";
+import { usePathname } from "next/navigation";
+
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen } = useModal();
   const { modalOpen, setModalOpen } = useModal();
   const [user, setUser] = useState<User | null>(null);
+  const [selectedTab, setSelectedTab] = useState("");
+  
+  const pathname = usePathname();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -47,7 +52,7 @@ const Sidebar = () => {
         <div className="sidebar__wrapper">
           <div className="sidebar__top">
             <a href="/for-you" className="sidebar__link--wrapper">
-              <div className="sidebar__link--line active--tab"></div>
+              <div className={`sidebar__link--line ${pathname === "/for-you" ? "active--tab" : ""}`}></div>
               <div className="sidebar__icon--wrapper">
                 <svg
                   stroke="currentColor"
@@ -64,7 +69,7 @@ const Sidebar = () => {
               <div className="sidebar__link--text">For you</div>
             </a>
             <a href="/my-library" className="sidebar__link--wrapper">
-              <div className="sidebar__link--line"></div>
+              <div className={`sidebar__link--line ${pathname === "/my-library" ? "active--tab" : ""}`}></div>
               <div className="sidebar__icon--wrapper">
                 <svg
                   stroke="currentColor"
@@ -120,7 +125,7 @@ const Sidebar = () => {
           </div>
           <div className="sidebar__bottom">
             <a href="/settings" className="sidebar__link--wrapper">
-              <div className="sidebar__link--line"></div>
+              <div className={`sidebar__link--line ${pathname === "/settings" ? "active--tab" : ""}`}></div>
               <div className="sidebar__icon--wrapper">
                 <svg
                   stroke="currentColor"
@@ -165,11 +170,6 @@ const Sidebar = () => {
             <div
               className="sidebar__link--wrapper"
               onClick={() => {
-                console.log(
-                  "clicked, user:",
-                  user,
-                  "calling setModalOpen(true)",
-                );
                 user ? handleLogout() : setModalOpen(true);
               }}
             >

@@ -9,6 +9,27 @@ const page = async ({ params }: { params: { id: string } }) => {
   const book__url = `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`;
   const res = await fetch(book__url);
   const book = await res.json();
+
+  const bookDurations: Record<string, string> = {
+  "5bxl50cz4bt": "03:23",
+  "2l0idxm1rvw": "04:52",
+  "4t0amyb4upc": "04:40",
+  "g2tdej27d23": "03:24",
+  "18tro3gle2p": "03:22",
+  "ap153fptaq": "03:01",
+  "2ozpy1q1pbt": "02:48",
+  "cuolx5oryy8": "02:20",
+  "6ncszvwbl4e": "03:24",
+  "hyqzkhdyq7h": "05:38",
+  "vt4i7lvosz": "03:18",
+  "g80xtszllo9": "02:50",
+  "6ctat6ynzqp": "02:45",
+  "pducrv7aiqr": "03:36",
+  "vdb1ghfrlt": "02:24"
+};
+
+const duration = bookDurations[book.id] ?? "";
+
   return (
     <>
       <div className="wrapper">
@@ -138,12 +159,7 @@ const page = async ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
                 <SaveButton
-                  bookId={book.id}
-                  title={book.title}
-                  author={book.author}
-                  imageLink={book.imageLink}
-                  subTitle={book.subTitle}
-                  duration={book.duration}
+                  book={{...book, duration}}
                 />
                 <div className="inner-book__secondary--title">
                   What's it about?

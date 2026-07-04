@@ -1,0 +1,26 @@
+.inner-book__bookmark {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0365f2;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 40px;
+    font-size: 18px;
+    transition: color .2s;
+}
+
+.inner-book__bookmark:hover {
+    color: #013e94;
+}
+
+.inner-book__bookmark--icon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+}
+
+.inner-book__bookmark--icon svg {
+    width: 100%;
+    height: 100%;
+}

@@ -12,7 +12,6 @@ const suggested_api =
 const fetchRecommendedBooks = async () => {
   const res = await fetch(recommended_api);
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
@@ -63,6 +62,18 @@ const page = async () => {
       };
     },
   );
+
+  const recommendedDurationsMap: Record<string, string> = {};
+  recommendedBooks.forEach((book: any, index: number) => {
+    recommendedDurationsMap[book.id] = recommendedDurations[index];
+  });
+
+  const suggestedDurationsMap: Record<string, string> = {};
+  suggestedBooks.forEach((book: any, index: number) => {
+    suggestedDurationsMap[book.id] = suggestedDurations[index];
+  });
+
+  const allDurations = { ...recommendedDurationsMap, ...suggestedDurationsMap };
 
   return (
     <>
@@ -133,6 +144,9 @@ const page = async () => {
                       href={`/book/${book.id}`}
                       className="for-you__recommended--books-link"
                     >
+                      {book.subscriptionRequired && (
+                        <div className="book__pill">Premium</div>
+                      )}
                       <figure
                         className="book__image--wrapper"
                         style={{ marginBottom: "8px" }}
@@ -205,6 +219,9 @@ const page = async () => {
                       href={`/book/${book.id}`}
                       className="for-you__recommended--books-link"
                     >
+                      {book.subscriptionRequired && (
+                        <div className="book__pill">Premium</div>
+                      )}
                       <figure
                         className="book__image--wrapper"
                         style={{ marginBottom: "8px" }}
