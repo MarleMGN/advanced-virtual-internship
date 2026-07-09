@@ -1,0 +1,27 @@
+.panel {
+    font-size: 20px;
+    padding: 16px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    border-radius: 8px;
+    width: 288px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel--premium {
+    color: #4fd1c5;
+    background-color: rgba(45, 122, 107, 0.3);
+}
+
+.panel--standard {
+    color: #676c72;
+    background-color: rgba(74, 85, 104, 0.3);
+}
+
+.panel__icon {
+    width: 24px;
+    height: 24px;
+}
