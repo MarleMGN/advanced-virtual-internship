@@ -133,7 +133,7 @@ const page = () => {
             </div>
             <div className="plan__card--cta">
               <span className="btn--wrapper">
-                <button className="btn" style={{ width: "300px" }}>
+                <button className="btn" style={{ width: "300px" }} >
                   {selectedPlan === "yearly" ? "Start your free 7-day trial" : "Start your first month" }
                 </button>
               </span>

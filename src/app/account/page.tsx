@@ -30,9 +30,12 @@ export default function AccountPage() {
   }, [app, auth.currentUser?.uid]);
 
   const upgradeToPremium = async () => {
+    console.log("upgradeToPremium clicked");
     const priceId = "price_1Tr2AwKEL1w8MmxLYvedQHxw";
+    console.log(priceId)
     const checkoutUrl = await getCheckoutUrl(app, priceId);
-    router.push(checkoutUrl);
+    console.log("Checkout URL:", checkoutUrl);
+    window.location.assign(checkoutUrl);
   };
 
   const manageSubscription = async () => {

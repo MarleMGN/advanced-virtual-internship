@@ -11,7 +11,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 
 export const getCheckoutUrl = async (
   app: FirebaseApp,
-  priceId: string
+  priceId: string,
 ): Promise<string> => {
   const auth = getAuth(app);
   const userId = auth.currentUser?.uid;
@@ -22,8 +22,12 @@ export const getCheckoutUrl = async (
     db,
     "customers",
     userId,
-    "checkout_sessions"
+    "checkout_sessions",
   );
+
+  console.log("User ID:", userId);
+  console.log("Price ID:", priceId);
+  console.log("Creating checkout session...");
 
   const docRef = await addDoc(checkoutSessionRef, {
     price: priceId,
@@ -31,12 +35,15 @@ export const getCheckoutUrl = async (
     cancel_url: window.location.origin,
   });
 
+  console.log("Checkout session document created");
+
   return new Promise<string>((resolve, reject) => {
     const unsubscribe = onSnapshot(docRef, (snap) => {
       const { error, url } = snap.data() as {
         error?: { message: string };
         url?: string;
       };
+      console.log("Snapshot data:", snap.data());
       if (error) {
         unsubscribe();
         reject(new Error(`An error occurred: ${error.message}`));
@@ -59,7 +66,7 @@ export const getPortalUrl = async (app: FirebaseApp): Promise<string> => {
     const functions = getFunctions(app, "us-central1");
     const functionRef = httpsCallable(
       functions,
-      "ext-firestore-stripe-payments-createPortalLink"
+      "ext-firestore-stripe-payments-createPortalLink",
     );
     const { data } = await functionRef({
       customerId: user?.uid,
