@@ -1,5 +1,5 @@
 import React from "react";
-import "./reviews.css";
+import "../components/reviews.css";
 import { useModal } from "@/context/ModalContext";
 
 const reviews = () => {

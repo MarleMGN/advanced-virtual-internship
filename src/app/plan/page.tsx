@@ -20,7 +20,7 @@ const page = () => {
         : "price_1Tr2CMKEL1w8MmxLWrAtilt9";
 
     const checkoutUrl = await getCheckoutUrl(app, priceId);
-    window.location.href = checkoutUrl;
+    window.location.assign(checkoutUrl);
   };
 
   return (

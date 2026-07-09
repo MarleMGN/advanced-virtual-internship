@@ -1,5 +1,5 @@
 import React from "react";
-import "./numbers.css"
+import "../components/numbers.css"
 
 const numbers = () => {
   return (

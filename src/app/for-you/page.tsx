@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import "./page.css";
 import Sidebar from "@/components/sidebar";
 import Searchbar from "@/components/searchbar";
@@ -10,15 +11,33 @@ const suggested_api =
   "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=suggested";
 
 const fetchRecommendedBooks = async () => {
-  const res = await fetch(recommended_api);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(recommended_api, { cache: "no-store" });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch recommended books");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 const fetchSuggestedBooks = async () => {
-  const res = await fetch(suggested_api);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(suggested_api, { cache: "no-store" });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch suggested books");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 const page = async () => {

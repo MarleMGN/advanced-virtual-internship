@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "./searchbar.css";
+import "../components/searchbar.css";
 import { useModal } from "@/context/ModalContext";
 
 const searchbar = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import "./landing.css";
+import "../components/landing.css";
 import { useModal } from "@/context/ModalContext"
 
 const landing = () => {
