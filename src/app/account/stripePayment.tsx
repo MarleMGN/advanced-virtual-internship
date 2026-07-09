@@ -25,17 +25,17 @@ export const getCheckoutUrl = async (
     "checkout_sessions",
   );
 
-  console.log("User ID:", userId);
-  console.log("Price ID:", priceId);
-  console.log("Creating checkout session...");
-
-  const docRef = await addDoc(checkoutSessionRef, {
-    price: priceId,
-    success_url: window.location.origin,
-    cancel_url: window.location.origin,
-  });
-
-  console.log("Checkout session document created");
+  let docRef;
+  try {
+    docRef = await addDoc(checkoutSessionRef, {
+      price: priceId,
+      success_url: window.location.origin,
+      cancel_url: window.location.origin,
+    });
+  } catch (error) {
+    console.error("Error adding doc:", error);
+    throw error;
+  }
 
   return new Promise<string>((resolve, reject) => {
     const unsubscribe = onSnapshot(docRef, (snap) => {
@@ -43,13 +43,11 @@ export const getCheckoutUrl = async (
         error?: { message: string };
         url?: string;
       };
-      console.log("Snapshot data:", snap.data());
       if (error) {
         unsubscribe();
         reject(new Error(`An error occurred: ${error.message}`));
       }
       if (url) {
-        console.log("Stripe Checkout URL:", url);
         unsubscribe();
         resolve(url);
       }
@@ -73,7 +71,6 @@ export const getPortalUrl = async (app: FirebaseApp): Promise<string> => {
       returnUrl: window.location.origin,
     });
 
-    // Add a type to the data
     dataWithUrl = data as { url: string };
     console.log("Reroute to Stripe portal: ", dataWithUrl.url);
   } catch (error) {

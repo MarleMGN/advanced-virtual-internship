@@ -1,13 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./page.css";
 import Image from "next/image";
 import Footer from "@/components/footer";
+import { initFirebase } from "@/lib/firebase";
+import { getCheckoutUrl } from "@/app/account/stripePayment";
+
 
 const page = () => {
-  const [selectedPlan, setSelectedPlan] = useState("yearly");
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
-  
+    const [selectedPlan, setSelectedPlan] = useState("yearly");
+    const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+
+  const upgradeToPremium = async () => {
+    const app = initFirebase();
+
+    const priceId =
+      selectedPlan === "monthly"
+        ? "price_1Tr2AwKEL1w8MmxLYvedQHxw"
+        : "price_1Tr2CMKEL1w8MmxLWrAtilt9";
+
+    const checkoutUrl = await getCheckoutUrl(app, priceId);
+    window.location.href = checkoutUrl;
+  };
+
   return (
     <>
       <div className="wrapper wrapper__full">
@@ -133,12 +148,16 @@ const page = () => {
             </div>
             <div className="plan__card--cta">
               <span className="btn--wrapper">
-                <button className="btn" style={{ width: "300px" }} >
-                  {selectedPlan === "yearly" ? "Start your free 7-day trial" : "Start your first month" }
+                <button className="btn" style={{ width: "300px" }} onClick={upgradeToPremium}>
+                  {selectedPlan === "yearly"
+                    ? "Start your free 7-day trial"
+                    : "Start your first month"}
                 </button>
               </span>
               <div className="plan__disclaimer">
-                {selectedPlan === "yearly" ? "Cancel your trial at any time before it ends, and you won't be charged." : "30-day money back guarantee, no questions asked."}
+                {selectedPlan === "yearly"
+                  ? "Cancel your trial at any time before it ends, and you won't be charged."
+                  : "30-day money back guarantee, no questions asked."}
               </div>
             </div>
             <div className="faq__wrapper">
