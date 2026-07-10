@@ -1,5 +1,4 @@
-"use client"
-import React, { useState } from "react";
+import React from "react";
 import "./page.css";
 import Sidebar from "@/components/sidebar";
 import Searchbar from "@/components/searchbar";

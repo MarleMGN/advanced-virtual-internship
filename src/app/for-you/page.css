@@ -90,6 +90,7 @@
 
 .for-you__recommended--books {
     display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
     gap: 16px;
     scroll-snap-type: x;
@@ -104,6 +105,7 @@
     border-radius: 4px;
     max-width: 200px;
     width: 100%;
+    flex-shrink: 0;
 }
 
 .for-you__recommended--books-link:hover {
@@ -179,6 +181,11 @@
     display: flex;
     align-items: center;
     border-radius: 20px;
+}
+
+.skeleton {
+  background: #e4e4e4;
+  border-radius: 4px;
 }
 
 @media (max-width: 1200px) {

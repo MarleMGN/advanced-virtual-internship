@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import "./authentication.css";
 import { useModal } from "@/context/ModalContext";
 import { auth, googleProvider } from "@/lib/firebase";
@@ -13,6 +14,7 @@ import { signOut } from "firebase/auth";
 
 const Authentication = () => {
   const { modalOpen, setModalOpen } = useModal();
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [passwordReset, setPasswordReset] = useState(false);
   const [email, setEmail] = useState("");
@@ -29,6 +31,7 @@ const Authentication = () => {
     try {
         await signInAnonymously(auth);
         setModalOpen(false);
+        router.push("/for-you");
     } catch (err) {
         if (err instanceof Error) {
             setError(err.message)
@@ -43,6 +46,7 @@ const Authentication = () => {
     try {
         await signInWithPopup(auth, googleProvider);
         setModalOpen(false);
+        router.push("/for-you");
     } catch (err) {
         if (err instanceof Error) {
             setError(err.message) 
@@ -57,6 +61,7 @@ const Authentication = () => {
     try {
         await createUserWithEmailAndPassword(auth, email, password);
         setModalOpen(false);
+        router.push("/for-you");
     } catch (err) {
         if (err instanceof Error) {
             setError(err.message)
@@ -85,6 +90,7 @@ const Authentication = () => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         setModalOpen(false);
+        router.push("/for-you");
     } catch (err) {
         if (err instanceof Error) {
             setError(err.message)
