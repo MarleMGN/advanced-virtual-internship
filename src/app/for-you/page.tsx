@@ -2,6 +2,7 @@ import React from "react";
 import "./page.css";
 import Sidebar from "@/components/sidebar";
 import Searchbar from "@/components/searchbar";
+import DurationDisplay from "@/components/DurationDisplay";
 
 const recommended_api =
   "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended";
@@ -42,56 +43,6 @@ const fetchSuggestedBooks = async () => {
 const page = async () => {
   const recommendedBooks = await fetchRecommendedBooks();
   const suggestedBooks = await fetchSuggestedBooks();
-  const recommendedDurations = [
-    "03:23",
-    "04:52",
-    "04:40",
-    "03:24",
-    "03:22",
-    "03:01",
-    "02:48",
-    "02:20",
-  ];
-
-  const suggestedDurations = [
-    "03:24",
-    "05:38",
-    "03:18",
-    "02:50",
-    "02:45",
-    "03:36",
-    "02:24",
-  ];
-
-  const updatedRecommendedBooks = recommendedBooks.map(
-    (book: any, index: number) => {
-      return {
-        ...book,
-        duration: recommendedDurations[index],
-      };
-    },
-  );
-
-  const updatedSuggestedBooks = suggestedBooks.map(
-    (book: any, index: number) => {
-      return {
-        ...book,
-        duration: suggestedDurations[index],
-      };
-    },
-  );
-
-  const recommendedDurationsMap: Record<string, string> = {};
-  recommendedBooks.forEach((book: any, index: number) => {
-    recommendedDurationsMap[book.id] = recommendedDurations[index];
-  });
-
-  const suggestedDurationsMap: Record<string, string> = {};
-  suggestedBooks.forEach((book: any, index: number) => {
-    suggestedDurationsMap[book.id] = suggestedDurations[index];
-  });
-
-  const allDurations = { ...recommendedDurationsMap, ...suggestedDurationsMap };
 
   return (
     <>
@@ -102,7 +53,6 @@ const page = async () => {
           <div className="row">
             <div className="for-you__wrapper">
               <div className="for-you__title">Selected just for you</div>
-              <audio></audio>
               <a href="/book/f9gy1gpai8" className="selected__book">
                 <div className="selected__book--sub-title">
                   How Constant Innovation Creates Radically Successful
@@ -156,7 +106,7 @@ const page = async () => {
                   We think you'll like these
                 </div>
                 <div className="for-you__recommended--books">
-                  {updatedRecommendedBooks.map((book: any) => (
+                  {recommendedBooks.map((book: any) => (
                     <a
                       key={book.id}
                       href={`/book/${book.id}`}
@@ -201,7 +151,7 @@ const page = async () => {
                             </svg>
                           </div>
                           <div className="recommended__book--details-text">
-                            {book.duration}
+                            <DurationDisplay audioLink={book.audioLink} />
                           </div>
                         </div>
                         <div className="recommended__book--details">
@@ -231,7 +181,7 @@ const page = async () => {
                 <div className="for-you__title">Suggested Books</div>
                 <div className="for-you__sub-title">Browse these books</div>
                 <div className="for-you__recommended--books">
-                  {updatedSuggestedBooks.map((book: any) => (
+                  {suggestedBooks.map((book: any) => (
                     <a
                       key={book.id}
                       href={`/book/${book.id}`}
@@ -276,7 +226,7 @@ const page = async () => {
                             </svg>
                           </div>
                           <div className="recommended__book--details-text">
-                            {book.duration}
+                            <DurationDisplay audioLink={book.audioLink} />
                           </div>
                         </div>
                         <div className="recommended__book--details">

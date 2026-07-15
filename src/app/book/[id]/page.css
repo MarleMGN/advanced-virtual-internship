@@ -45,6 +45,7 @@
     color: #032b41;
     font-weight: 500;
     font-size: 14px;
+    gap: 4px;
 }
 
 .book__image--wrapper {

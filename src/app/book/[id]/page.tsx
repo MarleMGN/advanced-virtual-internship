@@ -3,32 +3,13 @@ import "./page.css";
 import Sidebar from "@/components/sidebar";
 import Searchbar from "@/components/searchbar";
 import SaveButton from "@/components/SaveButton";
+import DurationDisplay from "@/components/DurationDisplay";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   const book__url = `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`;
   const res = await fetch(book__url);
   const book = await res.json();
-
-  const bookDurations: Record<string, string> = {
-  "5bxl50cz4bt": "03:23",
-  "2l0idxm1rvw": "04:52",
-  "4t0amyb4upc": "04:40",
-  "g2tdej27d23": "03:24",
-  "18tro3gle2p": "03:22",
-  "ap153fptaq": "03:01",
-  "2ozpy1q1pbt": "02:48",
-  "cuolx5oryy8": "02:20",
-  "6ncszvwbl4e": "03:24",
-  "hyqzkhdyq7h": "05:38",
-  "vt4i7lvosz": "03:18",
-  "g80xtszllo9": "02:50",
-  "6ctat6ynzqp": "02:45",
-  "pducrv7aiqr": "03:36",
-  "vdb1ghfrlt": "02:24"
-};
-
-const duration = bookDurations[book.id] ?? "";
 
   return (
     <>
@@ -81,7 +62,7 @@ const duration = bookDurations[book.id] ?? "";
                           <path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path>
                         </svg>
                       </div>
-                      <div className="inner-book__duration">03:58</div>
+                      <div className="inner-book__duration"><DurationDisplay audioLink={book.audioLink} /></div>
                     </div>
                     <div className="inner-book__description">
                       <div className="inner-book__icon">
@@ -125,7 +106,10 @@ const duration = bookDurations[book.id] ?? "";
                   </div>
                 </div>
                 <div className="inner-book__read--btn-wrapper">
-                  <div className="inner-book__read--btn">
+                  <a
+                    href={`/audio-player/${id}`}
+                    className="inner-book__read--btn"
+                  >
                     <div className="inner-book__read--icon">
                       <svg
                         stroke="currentColor"
@@ -140,8 +124,11 @@ const duration = bookDurations[book.id] ?? "";
                       </svg>
                     </div>
                     <div className="inner-book__read--text">Read</div>
-                  </div>
-                  <div className="inner-book__read--btn">
+                  </a>
+                  <a
+                    href={`/audio-player/${id}`}
+                    className="inner-book__read--btn"
+                  >
                     <div className="inner-book__read--icon">
                       <svg
                         stroke="currentColor"
@@ -156,11 +143,9 @@ const duration = bookDurations[book.id] ?? "";
                       </svg>
                     </div>
                     <div className="inner-book__read--text">Listen</div>
-                  </div>
+                  </a>
                 </div>
-                <SaveButton
-                  book={{...book, duration}}
-                />
+                <SaveButton book={book} />
                 <div className="inner-book__secondary--title">
                   What's it about?
                 </div>

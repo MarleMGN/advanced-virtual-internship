@@ -1,10 +1,60 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../components/searchbar.css";
 import { useModal } from "@/context/ModalContext";
+import { useRouter } from "next/navigation";
+
+interface Book {
+  id: string;
+  author: string;
+  title: string;
+  subTitle: string;
+  imageLink: string;
+  audioLink: string;
+  totalRating: number;
+  averageRating: number;
+  keyIdeas: number;
+  type: string;
+  status: string;
+  subscriptionRequired: boolean;
+  summary: string;
+  tags: string[];
+  bookDescription: string;
+  authorDescription: string;
+}
 
 const searchbar = () => {
   const { sidebarOpen, setSidebarOpen } = useModal();
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const [results, setResults] = useState<Book[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (query.trim().length === 0) {
+      setResults([]);
+      setIsOpen(false);
+      return;
+    }
+
+    const timeout = setTimeout(async () => {
+      const res = await fetch(
+        `https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${encodeURIComponent(query)}`,
+      );
+      const data = await res.json();
+      setResults(data);
+      setIsOpen(true);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [query]);
+
+  const handleSelect = (id: string) => {
+    setIsOpen(false);
+    setQuery("");
+    router.push(`/book/${id}`);
+  };
+
   return (
     <>
       <div className="search__background">
@@ -19,7 +69,10 @@ const searchbar = () => {
                   type="text"
                   placeholder="Search for books"
                   className="search__input"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
                 />
+
                 <div className="search__icon">
                   <svg
                     stroke="currentColor"
@@ -57,6 +110,47 @@ const searchbar = () => {
               </svg>
             </button>
           </div>
+          {isOpen && results.length > 0 && (
+            <div className="search__books--wrapper">
+              {results.map((book) => (
+                <a
+                  key={book.id}
+                  href={`/book/${book.id}`}
+                  className="search__book--link"
+                >
+                  <figure
+                    className="book__image--wrapper"
+                    style={{ height: "80px", width: "80px", minWidth: "80px" }}
+                  >
+                    <img src={book.imageLink} alt="" className="book__image" />
+                  </figure>
+                  <div className="search__book--info">
+                    <div className="search__book--title">{book.title}</div>
+                    <div className="search__book--author">{book.author}</div>
+                    <div className="search__book--duration">
+                      <div className="recommended__book--details">
+                        <div className="recommended__book--details-icon">
+                          <svg
+                            stroke="currentColor"
+                            fill="currentColor"
+                            strokeWidth="0"
+                            viewBox="0 0 24 24"
+                            height="1em"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path>
+                            <path d="M13 7h-2v6h6v-2h-4z"></path>
+                          </svg>
+                        </div>
+                        <div className="recommended__book--details-text"></div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

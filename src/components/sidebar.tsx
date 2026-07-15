@@ -6,15 +6,17 @@ import { useModal } from "@/context/ModalContext";
 import { auth } from "@/lib/firebase";
 import { signOut, User, onAuthStateChanged } from "firebase/auth";
 import { usePathname } from "next/navigation";
-
+import { useFontSize } from "@/context/FontSizeContext";
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen } = useModal();
   const { modalOpen, setModalOpen } = useModal();
   const [user, setUser] = useState<User | null>(null);
   const [selectedTab, setSelectedTab] = useState("");
-  
+  const { fontSize, setFontSize } = useFontSize();
+
   const pathname = usePathname();
+  const isAudioPlayerPage = pathname.startsWith("/audio-player");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -52,7 +54,9 @@ const Sidebar = () => {
         <div className="sidebar__wrapper">
           <div className="sidebar__top">
             <a href="/for-you" className="sidebar__link--wrapper">
-              <div className={`sidebar__link--line ${pathname === "/for-you" ? "active--tab" : ""}`}></div>
+              <div
+                className={`sidebar__link--line ${pathname === "/for-you" ? "active--tab" : ""}`}
+              ></div>
               <div className="sidebar__icon--wrapper">
                 <svg
                   stroke="currentColor"
@@ -69,7 +73,9 @@ const Sidebar = () => {
               <div className="sidebar__link--text">For you</div>
             </a>
             <a href="/my-library" className="sidebar__link--wrapper">
-              <div className={`sidebar__link--line ${pathname === "/my-library" ? "active--tab" : ""}`}></div>
+              <div
+                className={`sidebar__link--line ${pathname === "/my-library" ? "active--tab" : ""}`}
+              ></div>
               <div className="sidebar__icon--wrapper">
                 <svg
                   stroke="currentColor"
@@ -122,10 +128,84 @@ const Sidebar = () => {
               </div>
               <div className="sidebar__link--text">Search</div>
             </div>
+            {isAudioPlayerPage && (
+              <div className="sidebar__link--wrapper sidebar__font--size-wrapper">
+                <div className={`sidebar__link--text sidebar__font--size-icon ${fontSize === "small" ? "font--size-icon--active" : ""}`} onClick={() => setFontSize("small")}>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 24 24"
+                    className="sidebar__font--size-icon-small"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M11.246 15H4.754l-2 5H.6L7 4h2l6.4 16h-2.154l-2-5zm-.8-2L8 6.885 5.554 13h4.892zM21 12.535V12h2v8h-2v-.535a4 4 0 1 1 0-6.93zM19 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <div className={`sidebar__link--text sidebar__font--size-icon ${fontSize === "medium" ? "font--size-icon--active" : ""}`} onClick={() => setFontSize("medium")}>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 24 24"
+                    className="sidebar__font--size-icon-medium"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M11.246 15H4.754l-2 5H.6L7 4h2l6.4 16h-2.154l-2-5zm-.8-2L8 6.885 5.554 13h4.892zM21 12.535V12h2v8h-2v-.535a4 4 0 1 1 0-6.93zM19 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <div className={`sidebar__link--text sidebar__font--size-icon ${fontSize === "large" ? "font--size-icon--active" : ""}`} onClick={() => setFontSize("large")}>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 24 24"
+                    className="sidebar__font--size-icon-large"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M11.246 15H4.754l-2 5H.6L7 4h2l6.4 16h-2.154l-2-5zm-.8-2L8 6.885 5.554 13h4.892zM21 12.535V12h2v8h-2v-.535a4 4 0 1 1 0-6.93zM19 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <div className={`sidebar__link--text sidebar__font--size-icon ${fontSize === "xlarge" ? "font--size-icon--active" : ""}`} onClick={() => setFontSize("xlarge")}>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 24 24"
+                    className="sidebar__font--size-icon-xlarge"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M11.246 15H4.754l-2 5H.6L7 4h2l6.4 16h-2.154l-2-5zm-.8-2L8 6.885 5.554 13h4.892zM21 12.535V12h2v8h-2v-.535a4 4 0 1 1 0-6.93zM19 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            )}
           </div>
           <div className="sidebar__bottom">
             <a href="/settings" className="sidebar__link--wrapper">
-              <div className={`sidebar__link--line ${pathname === "/settings" ? "active--tab" : ""}`}></div>
+              <div
+                className={`sidebar__link--line ${pathname === "/settings" ? "active--tab" : ""}`}
+              ></div>
               <div className="sidebar__icon--wrapper">
                 <svg
                   stroke="currentColor"
